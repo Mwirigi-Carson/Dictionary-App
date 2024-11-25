@@ -152,6 +152,8 @@ fun SearchResponse(searchResponseItem: SearchResponseItem) {
                 index = index,
                 meaning = searchResponseItem.meanings[index]
             )
+
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }
@@ -200,7 +202,7 @@ fun Meaning(
                 Text(
                     text = "Definition",
                     fontWeight = FontWeight.SemiBold,
-                    fontSize = 19.sp,
+                    fontSize = 17.sp,
                     color = MaterialTheme.colorScheme.primary
                 )
 
@@ -224,9 +226,9 @@ fun Meaning(
             ) {
 
                 Text(
-                    text = "Definition",
+                    text = "Example",
                     fontWeight = FontWeight.SemiBold,
-                    fontSize = 19.sp,
+                    fontSize = 17.sp,
                     color = MaterialTheme.colorScheme.primary
                 )
 
@@ -240,6 +242,5 @@ fun Meaning(
 
             }
         }
-
     }
 }

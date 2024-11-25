@@ -1,5 +1,6 @@
 package com.kinyuacarson.dictionaryapp.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kinyuacarson.dictionaryapp.domain.repository.DictionaryRepository
@@ -20,12 +21,26 @@ class MainViewmodel @Inject constructor(
     private val _mainUiState = MutableStateFlow(MainUIState())
     val mainState = _mainUiState.asStateFlow()
 
-    val job : Job? = null
+    private var job : Job? = null
+
+    init {
+        _mainUiState.update {
+            it.copy(searchWord = "a")
+        }
+        job?.cancel()
+        job = viewModelScope.launch {
+            loadWordResult()
+        }
+    }
 
     fun onEvent ( mainUIEvent : MainUIEvents ) {
         when (mainUIEvent) {
             MainUIEvents.OnSearchClick -> {
-                loadWordResult()
+                job?.cancel()
+                job = viewModelScope.launch {
+                    loadWordResult()
+                }
+
             }
             is MainUIEvents.OnSearchWordChange -> {
                 _mainUiState.update {
@@ -48,6 +63,7 @@ class MainViewmodel @Inject constructor(
                         }
                     }
                     is Result.Success -> {
+                        Log.d("mainviewmodel", result.data.toString())
                         result.data?.let { searchResponseItem ->
                             _mainUiState.update {
                                 it.copy(searchResponseItem = searchResponseItem)

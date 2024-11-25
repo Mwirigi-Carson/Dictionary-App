@@ -1,5 +1,6 @@
 package com.kinyuacarson.dictionaryapp.data.repository
 
+import android.util.Log
 import com.kinyuacarson.dictionaryapp.data.remote.FreeDictionaryApi
 import com.kinyuacarson.dictionaryapp.data.remote.dto.toSearchResponseItem
 import com.kinyuacarson.dictionaryapp.domain.models.SearchResponseItem
@@ -43,9 +44,12 @@ class DictionaryRepositoryImpl @Inject constructor(
 
             }
 
-            remoteSearchResponseDto.let { searchResponseDto ->
-                searchResponseDto[0].let { wordItem ->
-                    emit(Result.Success(data = wordItem.toSearchResponseItem()))
+            Log.d("Repository Implementation", remoteSearchResponseDto.toString())
+
+            remoteSearchResponseDto?.let { searchResponseDto ->
+                searchResponseDto[0].let { searchResponseItemDto ->
+                    Log.d("repository-implementation", searchResponseItemDto.toString())
+                    emit(Result.Success(data = searchResponseItemDto?.toSearchResponseItem()))
                     emit(Result.Loading(isLoading = false))
                     return@flow
                 }

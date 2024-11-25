@@ -83,4 +83,5 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 //    coroutine-lifecycle-scope
     implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(kotlin("script-runtime"))
 }

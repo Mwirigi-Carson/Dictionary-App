@@ -8,7 +8,7 @@ interface FreeDictionaryApi {
     @GET("{word}")
     suspend fun searchWord(
         @Path("word") word : String
-    ) : SearchResponseDto
+    ) : SearchResponseDto?
 
     companion object {
         const val BASE_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"

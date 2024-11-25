@@ -7,9 +7,17 @@ data class DefinitionDto(
     val example: String? = null,
 )
 
-fun DefinitionDto.toDefinition() : Definition {
-    return Definition (
-        definition = definition ?: "",
-        example = example ?: ""
+fun definitionDtoToDefinition(definitionDto: DefinitionDto?) : Definition {
+    return Definition(
+        definition = definitionDto?.definition ?: "",
+        example = definitionDto?.example ?: ""
     )
 }
+
+
+//fun DefinitionDto.toDefinition() : Definition {
+//    return Definition (
+//        definition = definition ?: "",
+//        example = example ?: ""
+//    )
+//}
